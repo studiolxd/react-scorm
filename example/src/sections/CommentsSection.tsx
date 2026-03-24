@@ -136,10 +136,10 @@ export function CommentsSection() {
         <div className="feature-block-title">Version Behavior Differences</div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <div style={{ padding: 12, background: 'var(--bg-input)', borderRadius: 'var(--radius)', border: '1px solid var(--border)' }}>
-            <div style={{ fontSize: 11, color: 'var(--accent-fg)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: 'var(--text)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
               SCORM 1.2
             </div>
-            <ul style={{ margin: 0, padding: '0 0 0 16px', color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.7 }}>
+            <ul style={{ margin: 0, padding: '0 0 0 16px', color: 'var(--text)', fontSize: 12, lineHeight: 1.7 }}>
               <li>Single string field: <code>cmi.comments</code></li>
               <li>Comments are concatenated with <code>\n</code></li>
               <li><code>getLearnerCommentCount()</code> always returns <code>0</code></li>
@@ -147,10 +147,10 @@ export function CommentsSection() {
             </ul>
           </div>
           <div style={{ padding: 12, background: 'var(--bg-input)', borderRadius: 'var(--radius)', border: '1px solid var(--border)' }}>
-            <div style={{ fontSize: 11, color: 'var(--accent-fg)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: 'var(--text)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
               SCORM 2004
             </div>
-            <ul style={{ margin: 0, padding: '0 0 0 16px', color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.7 }}>
+            <ul style={{ margin: 0, padding: '0 0 0 16px', color: 'var(--text)', fontSize: 12, lineHeight: 1.7 }}>
               <li>Indexed array: <code>cmi.comments_from_learner.N.comment</code></li>
               <li>Each entry: comment text, location, timestamp</li>
               <li><code>getLearnerCommentCount()</code> returns actual count</li>
