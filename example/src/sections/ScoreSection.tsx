@@ -71,7 +71,7 @@ export function ScoreSection() {
 
       <div className="feature-block">
         <div className="feature-block-title">
-          Set Score <span className="badge badge-both">1.2 + 2004</span>
+          Set Score <span className="badge badge-12">1.2</span> <span className="badge badge-2004">2004</span>
         </div>
         <div className="controls">
           <div className="field">
@@ -155,7 +155,7 @@ export function ScoreSection() {
 
       <div className="feature-block">
         <div className="feature-block-title">
-          Preferences <span className="badge badge-both">1.2 + 2004</span>
+          Preferences <span className="badge badge-12">1.2</span> <span className="badge badge-2004">2004</span>
         </div>
         <p className="section-description" style={{ marginBottom: 14 }}>
           SCORM allows the LMS to store learner audio and speed preferences. These are typically

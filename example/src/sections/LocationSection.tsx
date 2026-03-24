@@ -60,7 +60,7 @@ export function LocationSection() {
       {/* ── Location ────────────────────────────────── */}
       <div className="feature-block">
         <div className="feature-block-title">
-          Bookmark / Location <span className="badge badge-both">1.2 + 2004</span>
+          Bookmark / Location <span className="badge badge-12">1.2</span> <span className="badge badge-2004">2004</span>
         </div>
         <div className="controls">
           <div className="field">
@@ -91,7 +91,7 @@ export function LocationSection() {
       {/* ── Suspend data ────────────────────────────── */}
       <div className="feature-block">
         <div className="feature-block-title">
-          Suspend Data <span className="badge badge-both">1.2 + 2004</span>
+          Suspend Data <span className="badge badge-12">1.2</span> <span className="badge badge-2004">2004</span>
         </div>
         <p className="section-description" style={{ marginBottom: 14 }}>
           Up to 4096 characters (SCORM 1.2) or 64 000 characters (SCORM 2004) of arbitrary string
@@ -142,7 +142,7 @@ api.commit(); // flush to LMS`}</pre>
       {/* ── Session time & Exit ─────────────────────── */}
       <div className="feature-block">
         <div className="feature-block-title">
-          Session Time &amp; Exit <span className="badge badge-both">1.2 + 2004</span>
+          Session Time &amp; Exit <span className="badge badge-12">1.2</span> <span className="badge badge-2004">2004</span>
         </div>
         <div className="controls">
           <div className="field">

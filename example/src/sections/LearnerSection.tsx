@@ -110,7 +110,7 @@ export function LearnerSection() {
         <p className="section-description" style={{ marginBottom: 14 }}>
           These fields are set by the LMS and are read-only for the SCO. They define mastery
           thresholds and time limits for the lesson.{' '}
-          <span className="badge badge-12">1.2 only</span>
+          <span className="badge badge-12">1.2</span>
         </p>
         <div className="controls">
           <button

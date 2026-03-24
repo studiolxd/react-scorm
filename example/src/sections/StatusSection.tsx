@@ -56,7 +56,7 @@ export function StatusSection() {
       <div className="feature-block">
         <div className="feature-block-title">
           Completion Status{' '}
-          <span className="badge badge-both">1.2 + 2004</span>
+          <span className="badge badge-12">1.2</span> <span className="badge badge-2004">2004</span>
         </div>
         <p className="section-description" style={{ marginBottom: 14 }}>
           In <strong>SCORM 1.2</strong>, <code>lesson_status</code> is the single source of
@@ -92,7 +92,7 @@ export function StatusSection() {
       <div className="feature-block">
         <div className="feature-block-title">
           Success Status{' '}
-          <span className="badge badge-both">1.2 + 2004</span>
+          <span className="badge badge-12">1.2</span> <span className="badge badge-2004">2004</span>
         </div>
         <p className="section-description" style={{ marginBottom: 14 }}>
           In <strong>SCORM 1.2</strong>, <code>setPassed()</code>/<code>setFailed()</code> also

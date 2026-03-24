@@ -81,7 +81,7 @@ export function CommentsSection() {
       {/* ── Add learner comment ─────────────────── */}
       <div className="feature-block">
         <div className="feature-block-title">
-          Add Learner Comment <span className="badge badge-both">1.2 + 2004</span>
+          Add Learner Comment <span className="badge badge-12">1.2</span> <span className="badge badge-2004">2004</span>
         </div>
         <div className="controls">
           <div className="field" style={{ flexGrow: 1 }}>
@@ -136,7 +136,7 @@ export function CommentsSection() {
         <div className="feature-block-title">Version Behavior Differences</div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           <div style={{ padding: 12, background: 'var(--bg-input)', borderRadius: 'var(--radius)', border: '1px solid var(--border)' }}>
-            <div style={{ fontSize: 11, color: 'var(--accent)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: 'var(--accent-fg)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
               SCORM 1.2
             </div>
             <ul style={{ margin: 0, padding: '0 0 0 16px', color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.7 }}>
@@ -147,7 +147,7 @@ export function CommentsSection() {
             </ul>
           </div>
           <div style={{ padding: 12, background: 'var(--bg-input)', borderRadius: 'var(--radius)', border: '1px solid var(--border)' }}>
-            <div style={{ fontSize: 11, color: 'var(--accent-2004)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
+            <div style={{ fontSize: 11, color: 'var(--accent-fg)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
               SCORM 2004
             </div>
             <ul style={{ margin: 0, padding: '0 0 0 16px', color: 'var(--text-muted)', fontSize: 12, lineHeight: 1.7 }}>

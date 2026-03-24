@@ -60,7 +60,7 @@ export function AdvancedSection() {
       {/* ── Raw API ─────────────────────────────── */}
       <div className="feature-block">
         <div className="feature-block-title">
-          Raw API Escape Hatch <span className="badge badge-both">1.2 + 2004</span>
+          Raw API Escape Hatch <span className="badge badge-12">1.2</span> <span className="badge badge-2004">2004</span>
         </div>
         <p className="section-description" style={{ marginBottom: 14 }}>
           Use <code>getRaw(path)</code> and <code>setRaw(path, value)</code> to access any CMI
@@ -151,7 +151,7 @@ export function AdvancedSection() {
       <div className="feature-block">
         <div className="feature-block-title">
           Progress Measure{' '}
-          <span className="badge badge-2004">2004 only</span>
+          <span className="badge badge-2004">2004</span>
         </div>
         <p className="section-description" style={{ marginBottom: 14 }}>
           A value from 0.0 to 1.0 indicating how far through the SCO the learner has progressed.
@@ -203,7 +203,7 @@ export function AdvancedSection() {
       <div className="feature-block">
         <div className="feature-block-title">
           ADL Navigation{' '}
-          <span className="badge badge-2004">2004 only</span>
+          <span className="badge badge-2004">2004</span>
         </div>
         <p className="section-description" style={{ marginBottom: 14 }}>
           SCORM 2004 allows a SCO to request navigation actions from the LMS sequencing engine
