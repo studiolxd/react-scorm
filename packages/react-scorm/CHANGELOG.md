@@ -1,0 +1,46 @@
+# Changelog
+
+All notable changes to `@studiolxd/react-scorm` are documented here.
+
+## [1.0.0] - 2026-03-23
+
+### Added
+- Full SCORM 1.2 and SCORM 2004 (4th Edition) runtime support
+- `<ScormProvider>` component with `noLmsBehavior` option: `'error'` | `'mock'` | `'throw'`
+- `useScorm()` hook exposing `status`, `api`, and `raw` driver
+- `useScormAutoTerminate()` hook for opt-in lifecycle management (initialize on mount, terminate on unmount/unload)
+- High-level `ScormApi` with full coverage of the CMI data model:
+  - Lifecycle: `initialize`, `terminate`, `commit`
+  - Status: `setComplete`, `setIncomplete`, `setPassed`, `setFailed`, `getCompletionStatus`, `getSuccessStatus`
+  - Score: `setScore` (with `raw`, `min`, `max`, `scaled`), `getScore`
+  - Location & suspend data: `setLocation`, `getLocation`, `setSuspendData`, `getSuspendData`
+  - Session time: `setSessionTime`, `getTotalTime`
+  - Learner info: `getLearnerId`, `getLearnerName`, `getLaunchData`, `getMode`, `getCredit`, `getEntry`
+  - Objectives: `setObjective`, `getObjective`, `getObjectiveCount`
+  - Interactions: `recordInteraction`, `getInteractionCount`
+  - Comments: `addLearnerComment`, `getLearnerCommentCount`, `getLmsCommentCount`
+  - Preferences: `setPreference`, `getPreferences`
+  - Progress (2004 only): `setProgressMeasure`
+  - Exit: `setExit`
+  - Student data: `getMasteryScore`, `getMaxTimeAllowed`, `getTimeLimitAction`
+  - Navigation (2004 only): `setNavRequest`, `getNavRequestValid`
+  - Raw escape hatch: `getRaw`, `setRaw`
+- In-memory mock SCORM API (`MockScorm12Api`, `MockScorm2004Api`) for development and testing
+- Result type pattern (`ok`/`err`) — no implicit throws from API calls
+- Typed CMI path types (`Scorm12CmiPath`, `Scorm2004CmiPath`) catching typos at compile time
+- Path builder helpers (`scorm12ObjectivePath`, `scorm2004InteractionPath`, etc.)
+- Time formatter utilities (`formatScorm12Time`, `formatScorm2004Time`)
+- Duck-type validation when locating the LMS API in the window hierarchy
+
+### Hooks
+- `useScormSession()` — superset of `useScorm()` that tracks `initialized` and `terminated` as reactive React state, for consumers that need re-renders on lifecycle transitions without managing that state themselves
+
+### Security
+- LMS API objects are validated for all 8 required methods before use, preventing hostile partial objects from passing as a valid API
+- `errorString` and `diagnostic` fields documented as untrusted LMS input — must be HTML-escaped before DOM insertion
+- Score, scaled, and progress measure inputs validated with proper SCORM error codes (405/407) before forwarding to the LMS
+
+### Validation
+- `setScore`: `raw`, `min`, `max` reject NaN/Infinity (error 405); `scaled` rejects values outside `[-1, 1]` (error 407)
+- `setProgressMeasure`: rejects NaN and values outside `[0, 1]` (error 407)
+- `addLearnerComment` (SCORM 1.2): rejects comments that would cause `cmi.comments` to exceed 4096 characters (error 405)

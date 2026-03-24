@@ -1,0 +1,14 @@
+{
+  "name": "@studiolxd/react-scorm-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "example"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=packages/react-scorm",
+    "test": "npm run test:run --workspace=packages/react-scorm",
+    "dev:lib": "npm run dev --workspace=packages/react-scorm",
+    "dev:example": "npm run dev --workspace=example"
+  }
+}
