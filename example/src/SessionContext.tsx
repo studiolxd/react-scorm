@@ -1,20 +1,59 @@
 /**
- * SessionContext — shares a single useScormSession() instance across all demo sections.
+ * SessionContext — shares a single reactive session state across all demo sections.
  *
  * ScormProvider intentionally keeps status.initialized = false (static snapshot).
- * useScormSession() maintains reactive initialized/terminated state, but only within
- * the component that calls it. By hoisting the call to ScormDemoShell and distributing
- * it via context, all sections share the same live session state.
+ * This context wraps useScorm() and tracks initialized/terminated as local React
+ * state, then distributes the result to all sections so they share one live view
+ * of the session lifecycle.
  */
-import { createContext, useContext } from 'react';
-import { useScormSession } from '@studiolxd/react-scorm';
+import { createContext, useContext, useState, useCallback } from 'react';
+import { useScorm } from '@studiolxd/react-scorm';
+import type { Result, ScormError } from '@studiolxd/react-scorm';
 
-type SessionValue = ReturnType<typeof useScormSession>;
+type BoolResult = Result<true, ScormError> | undefined;
+
+interface SessionValue {
+  api: ReturnType<typeof useScorm>['api'];
+  status: ReturnType<typeof useScorm>['status'];
+  raw: ReturnType<typeof useScorm>['raw'];
+  initialized: boolean;
+  terminated: boolean;
+  initialize: () => BoolResult;
+  commit: () => BoolResult;
+  terminate: () => BoolResult;
+}
 
 export const SessionContext = createContext<SessionValue | null>(null);
 
 export function useSessionContext(): SessionValue {
   const ctx = useContext(SessionContext);
-  if (!ctx) throw new Error('useSessionContext must be used inside ScormDemoShell');
+  if (!ctx) throw new Error('useSessionContext must be used inside SessionContext.Provider');
   return ctx;
+}
+
+export function useSessionValue(): SessionValue {
+  const { api, status, raw } = useScorm();
+  const [initialized, setInitialized] = useState(false);
+  const [terminated, setTerminated] = useState(false);
+
+  const initialize = useCallback((): BoolResult => {
+    if (!api) return undefined;
+    const r = api.initialize();
+    if (r.ok) setInitialized(true);
+    return r;
+  }, [api]);
+
+  const commit = useCallback((): BoolResult => {
+    if (!api) return undefined;
+    return api.commit();
+  }, [api]);
+
+  const terminate = useCallback((): BoolResult => {
+    if (!api) return undefined;
+    const r = api.terminate();
+    if (r.ok) { setInitialized(false); setTerminated(true); }
+    return r;
+  }, [api]);
+
+  return { api, status, raw, initialized, terminated, initialize, commit, terminate };
 }

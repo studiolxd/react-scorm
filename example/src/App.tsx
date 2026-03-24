@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ScormProvider, useScormSession } from '@studiolxd/react-scorm';
+import { ScormProvider } from '@studiolxd/react-scorm';
 import type { ScormVersion } from '@studiolxd/react-scorm';
-import { SessionContext } from './SessionContext';
+import { SessionContext, useSessionValue } from './SessionContext';
 import { LifecycleSection } from './sections/LifecycleSection';
 import { LearnerSection } from './sections/LearnerSection';
 import { StatusSection } from './sections/StatusSection';
@@ -33,7 +33,7 @@ interface ScormDemoShellProps {
 }
 
 function ScormDemoShell({ activeTab, onTabChange }: ScormDemoShellProps) {
-  const session = useScormSession();
+  const session = useSessionValue();
 
   return (
     <SessionContext.Provider value={session}>
