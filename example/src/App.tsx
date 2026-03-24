@@ -78,11 +78,7 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="app-header-left">
-          <div className="app-logo">
-            <span className="logo-bracket">[</span>
-            <span className="logo-name">react-scorm</span>
-            <span className="logo-bracket">]</span>
-          </div>
+          <div className="app-logo">React SCORM</div>
           <span className="app-tagline">interactive demo</span>
         </div>
 
