@@ -12,7 +12,7 @@
  * SCORM 1.2 note: completion and success are combined in one field
  * (cmi.core.lesson_status). SCORM 2004 separates them into two fields.
  */
-import { useScorm } from '@studiolxd/react-scorm';
+import { useSessionContext } from '../SessionContext';
 import type { Result, ScormError } from '@studiolxd/react-scorm';
 import { useState } from 'react';
 
@@ -20,11 +20,11 @@ type LogEntry = { text: string; ok: boolean };
 type AnyResult = Result<unknown, ScormError>;
 
 export function StatusSection() {
-  const { api, status } = useScorm();
+  const { api, initialized } = useSessionContext();
   const [log, setLog] = useState<LogEntry[]>([]);
 
   const guard = (): boolean => {
-    if (!api || !status.initialized) {
+    if (!api || !initialized) {
       setLog([{ text: '⚠ Not initialized. Click Initialize in Lifecycle first.', ok: false }]);
       return false;
     }

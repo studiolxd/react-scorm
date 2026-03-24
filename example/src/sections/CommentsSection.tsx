@@ -12,11 +12,11 @@
  *   SCORM 2004: comments are an indexed array (cmi.comments_from_learner). Each entry
  *     has a comment text, optional location, and optional timestamp.
  */
-import { useScorm } from '@studiolxd/react-scorm';
+import { useSessionContext } from '../SessionContext';
 import { useState } from 'react';
 
 export function CommentsSection() {
-  const { api, status } = useScorm();
+  const { api, initialized } = useSessionContext();
   const [comment, setComment] = useState('Great lesson! Very clear explanations.');
   const [commentLocation, setCommentLocation] = useState('page-3');
   const [result, setResult] = useState('');
@@ -24,7 +24,7 @@ export function CommentsSection() {
   const [log, setLog] = useState<Array<{ text: string; ok: boolean }>>([]);
 
   const guard = (): boolean => {
-    if (!api || !status.initialized) {
+    if (!api || !initialized) {
       setResult('⚠ Not initialized. Click Initialize in Lifecycle first.');
       setResultOk(false);
       return false;

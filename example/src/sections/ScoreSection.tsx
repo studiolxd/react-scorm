@@ -9,11 +9,11 @@
  * `setScore` ignores the `scaled` field. `getScore()` normalizes the result
  * so application code works the same way across versions.
  */
-import { useScorm } from '@studiolxd/react-scorm';
+import { useSessionContext } from '../SessionContext';
 import { useState } from 'react';
 
 export function ScoreSection() {
-  const { api, status } = useScorm();
+  const { api, status, initialized } = useSessionContext();
   const [raw, setRaw] = useState('75');
   const [min, setMin] = useState('0');
   const [max, setMax] = useState('100');
@@ -22,7 +22,7 @@ export function ScoreSection() {
   const [resultOk, setResultOk] = useState(true);
 
   const guard = (): boolean => {
-    if (!api || !status.initialized) {
+    if (!api || !initialized) {
       setResult('⚠ Not initialized. Click Initialize in Lifecycle first.');
       setResultOk(false);
       return false;

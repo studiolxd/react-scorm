@@ -12,7 +12,7 @@
  * In mock mode these return sensible default values so you can verify the API
  * shape without an LMS.
  */
-import { useScorm } from '@studiolxd/react-scorm';
+import { useSessionContext } from '../SessionContext';
 import type { Result } from '@studiolxd/react-scorm';
 import type { ScormError } from '@studiolxd/react-scorm';
 import { useState } from 'react';
@@ -22,11 +22,11 @@ type ApiCall = [string, () => StringResult];
 type ResultState = { label: string; value: string; ok: boolean } | null;
 
 export function LearnerSection() {
-  const { api, status } = useScorm();
+  const { api, initialized } = useSessionContext();
   const [results, setResults] = useState<ResultState[]>([]);
 
   const guard = (): boolean => {
-    if (!api || !status.initialized) {
+    if (!api || !initialized) {
       setResults([{ label: '', value: '⚠ Not initialized. Click Initialize in Lifecycle first.', ok: false }]);
       return false;
     }

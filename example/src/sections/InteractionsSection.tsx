@@ -15,7 +15,7 @@
  *   - description field: 2004 only
  *   - type "long-fill-in": 2004 only
  */
-import { useScorm } from '@studiolxd/react-scorm';
+import { useSessionContext } from '../SessionContext';
 import type { InteractionType } from '@studiolxd/react-scorm';
 import { useState } from 'react';
 
@@ -59,14 +59,14 @@ const QUESTIONS: Question[] = [
 ];
 
 export function InteractionsSection() {
-  const { api, status } = useScorm();
+  const { api, status, initialized } = useSessionContext();
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [recordResult, setRecordResult] = useState('');
   const [recordOk, setRecordOk] = useState(true);
 
   const guard = (): boolean => {
-    if (!api || !status.initialized) {
+    if (!api || !initialized) {
       setRecordResult('⚠ Not initialized. Click Initialize in Lifecycle first.');
       setRecordOk(false);
       return false;

@@ -10,12 +10,12 @@
  * SCORM 2004 objectives: id, successStatus, completionStatus, scoreRaw/Min/Max/Scaled,
  *   progressMeasure, description
  */
-import { useScorm } from '@studiolxd/react-scorm';
+import { useSessionContext } from '../SessionContext';
 import type { ObjectiveRecord } from '@studiolxd/react-scorm';
 import { useState } from 'react';
 
 export function ObjectivesSection() {
-  const { api, status } = useScorm();
+  const { api, status, initialized } = useSessionContext();
   const [objIndex, setObjIndex] = useState('0');
   const [objId, setObjId] = useState('module-1-objective');
   const [objStatus, setObjStatus] = useState('passed');         // 1.2 only
@@ -30,7 +30,7 @@ export function ObjectivesSection() {
   const [resultOk, setResultOk] = useState(true);
 
   const guard = (): boolean => {
-    if (!api || !status.initialized) {
+    if (!api || !initialized) {
       setResult('⚠ Not initialized. Click Initialize in Lifecycle first.');
       setResultOk(false);
       return false;

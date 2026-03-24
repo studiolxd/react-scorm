@@ -9,23 +9,21 @@
  *
  * Also displays the live ScormStatus object returned by useScorm().
  */
-import { useScorm } from '@studiolxd/react-scorm';
-import type { Result, ScormError } from '@studiolxd/react-scorm';
+import { useSessionContext } from '../SessionContext';
 import { useState } from 'react';
+import type { Result, ScormError } from '@studiolxd/react-scorm';
 
-type BoolResult = Result<true, ScormError>;
+type BoolResult = Result<true, ScormError> | undefined;
 
 export function LifecycleSection() {
-  const { api, status } = useScorm();
+  const { status, initialized, terminated, initialize, terminate, commit } = useSessionContext();
   const [log, setLog] = useState<string[]>([]);
 
-  /** Append a line to the result log. */
   const addLog = (line: string) => setLog((prev) => [...prev, line]);
 
-  /** Wrap an API call with logging. */
   const call = (label: string, fn: () => BoolResult) => {
-    if (!api) { addLog('✗ api is null — ScormProvider not ready'); return; }
     const result = fn();
+    if (result === undefined) { addLog('✗ api is null — ScormProvider not ready'); return; }
     if (result.ok) {
       addLog(`✓ ${label} → ${JSON.stringify(result.value)}`);
     } else {
@@ -60,14 +58,14 @@ export function LifecycleSection() {
           </div>
           <div className="status-item">
             <span className="status-item-label">initialized</span>
-            <span className={`status-item-value ${String(status.initialized)}`}>
-              {String(status.initialized)}
+            <span className={`status-item-value ${String(initialized)}`}>
+              {String(initialized)}
             </span>
           </div>
           <div className="status-item">
             <span className="status-item-label">terminated</span>
-            <span className={`status-item-value ${String(status.terminated)}`}>
-              {String(status.terminated)}
+            <span className={`status-item-value ${String(terminated)}`}>
+              {String(terminated)}
             </span>
           </div>
           <div className="status-item">
@@ -83,22 +81,22 @@ export function LifecycleSection() {
         <div className="controls">
           <button
             className="btn btn-primary"
-            onClick={() => call('api.initialize()', () => api!.initialize())}
-            disabled={status.initialized || status.terminated}
+            onClick={() => call('api.initialize()', initialize)}
+            disabled={initialized || terminated}
           >
             Initialize
           </button>
           <button
             className="btn"
-            onClick={() => call('api.commit()', () => api!.commit())}
-            disabled={!status.initialized || status.terminated}
+            onClick={() => call('api.commit()', commit)}
+            disabled={!initialized || terminated}
           >
             Commit
           </button>
           <button
             className="btn btn-danger"
-            onClick={() => call('api.terminate()', () => api!.terminate())}
-            disabled={!status.initialized || status.terminated}
+            onClick={() => call('api.terminate()', terminate)}
+            disabled={!initialized || terminated}
           >
             Terminate
           </button>

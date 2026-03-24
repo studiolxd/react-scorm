@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { ScormProvider } from '@studiolxd/react-scorm';
+import { ScormProvider, useScormSession } from '@studiolxd/react-scorm';
 import type { ScormVersion } from '@studiolxd/react-scorm';
+import { SessionContext } from './SessionContext';
 import { LifecycleSection } from './sections/LifecycleSection';
 import { LearnerSection } from './sections/LearnerSection';
 import { StatusSection } from './sections/StatusSection';
@@ -32,7 +33,10 @@ interface ScormDemoShellProps {
 }
 
 function ScormDemoShell({ activeTab, onTabChange }: ScormDemoShellProps) {
+  const session = useScormSession();
+
   return (
+    <SessionContext.Provider value={session}>
     <div className="app-body">
       <nav className="tab-nav" aria-label="Demo sections">
         {TABS.map((tab) => (
@@ -62,6 +66,7 @@ function ScormDemoShell({ activeTab, onTabChange }: ScormDemoShellProps) {
         {activeTab === 'advanced' && <AdvancedSection />}
       </main>
     </div>
+    </SessionContext.Provider>
   );
 }
 

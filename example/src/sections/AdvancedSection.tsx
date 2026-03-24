@@ -10,11 +10,12 @@
  *   formatScorm12Time(ms)        — format ms as HH:MM:SS.SS
  *   formatScorm2004Time(ms)      — format ms as ISO 8601 PT#H#M#S
  */
-import { useScorm, formatScorm12Time, formatScorm2004Time } from '@studiolxd/react-scorm';
+import { formatScorm12Time, formatScorm2004Time } from '@studiolxd/react-scorm';
+import { useSessionContext } from '../SessionContext';
 import { useState } from 'react';
 
 export function AdvancedSection() {
-  const { api, status } = useScorm();
+  const { api, status, initialized } = useSessionContext();
 
   // Raw API state
   const [rawPath, setRawPath] = useState('cmi.learner_id');
@@ -36,7 +37,7 @@ export function AdvancedSection() {
   const [timeMs, setTimeMs] = useState(5430000); // 1h 30m 30s
 
   const guard = (setter: (v: string) => void, setOk: (v: boolean) => void): boolean => {
-    if (!api || !status.initialized) {
+    if (!api || !initialized) {
       setter('⚠ Not initialized. Click Initialize in Lifecycle first.');
       setOk(false);
       return false;

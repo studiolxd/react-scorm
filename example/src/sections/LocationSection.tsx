@@ -13,11 +13,11 @@
  * Suspend data is the standard mechanism for saving arbitrary learner progress
  * (quiz answers, page index, custom state) between sessions.
  */
-import { useScorm } from '@studiolxd/react-scorm';
+import { useSessionContext } from '../SessionContext';
 import { useState } from 'react';
 
 export function LocationSection() {
-  const { api, status } = useScorm();
+  const { api, initialized } = useSessionContext();
   const [location, setLocation] = useState('page-3');
   const [suspendData, setSuspendData] = useState('{"page":3,"answers":{"q1":"A","q2":"C"}}');
   const [sessionMs, setSessionMs] = useState('60000');
@@ -26,7 +26,7 @@ export function LocationSection() {
   const [resultOk, setResultOk] = useState(true);
 
   const guard = (): boolean => {
-    if (!api || !status.initialized) {
+    if (!api || !initialized) {
       setResult('⚠ Not initialized. Click Initialize in Lifecycle first.');
       setResultOk(false);
       return false;
