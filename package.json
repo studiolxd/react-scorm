@@ -5,6 +5,9 @@
     "packages/*",
     "example"
   ],
+  "devDependencies": {
+    "jsdom": "^25.0.0"
+  },
   "scripts": {
     "build": "npm run build --workspace=packages/react-scorm",
     "test": "npm run test:run --workspace=packages/react-scorm",

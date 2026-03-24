@@ -1,6 +1,6 @@
 {
   "name": "@studiolxd/react-scorm",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Headless React + TypeScript SCORM 1.2/2004 runtime integration library",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -39,13 +39,13 @@
     "@testing-library/react": "^16.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@vitest/coverage-v8": "^2.0.0",
+    "@vitest/coverage-v8": "^4.1.1",
     "jsdom": "^25.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.5.0",
-    "vitest": "^2.0.0"
+    "vitest": "^4.1.1"
   },
   "keywords": [
     "scorm",

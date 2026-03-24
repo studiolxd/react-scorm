@@ -2,6 +2,12 @@
 
 All notable changes to `@studiolxd/react-scorm` are documented here.
 
+## [1.0.2] - 2026-03-24
+
+### Changed
+- Upgrade vitest from `^2.0.0` to `^4.1.1` and align `@vitest/coverage-v8` to `^4.1.1`
+- Add `jsdom` to monorepo root `devDependencies` to ensure correct hoisting in npm workspaces
+
 ## [1.0.1] - 2026-03-24
 
 ### Documentation
