@@ -2,6 +2,13 @@
 
 All notable changes to `@studiolxd/react-scorm` are documented here.
 
+## [1.0.1] - 2026-03-24
+
+### Documentation
+- Add multilingual README translations (es, fr, pt, de, pl)
+- Add language navigation switcher to all README files
+- Migrate to npm workspaces monorepo (library under `packages/react-scorm/`)
+
 ## [1.0.0] - 2026-03-23
 
 ### Added
