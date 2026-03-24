@@ -32,12 +32,12 @@ o comportamento dos dois padrões SCORM lado a lado.
 | Aba | Funcionalidades demonstradas |
 |-----|------------------------------|
 | **Lifecycle** | `initialize()`, `commit()`, `terminate()`, `ScormStatus` ao vivo, `useScormAutoTerminate` |
-| **Learner** | `getLearnerId()`, `getLearnerName()`, `getLaunchData()`, `getMode()`, `getCredit()`, `getEntry()`, `getMasteryScore()` |
+| **Learner** | `getLearnerId()`, `getLearnerName()`, `getLaunchData()`, `getMode()`, `getCredit()`, `getEntry()`, `getMasteryScore()`, `getMaxTimeAllowed()`, `getTimeLimitAction()` |
 | **Status** | `setComplete()`, `setIncomplete()`, `setPassed()`, `setFailed()`, `getCompletionStatus()`, `getSuccessStatus()` |
 | **Score** | `setScore({ raw, min, max, scaled? })`, `getScore()`, `getPreferences()`, `setPreference()` |
 | **Location** | `setLocation()`, `getLocation()`, `setSuspendData()`, `getSuspendData()`, `setSessionTime()`, `getTotalTime()`, `setExit()` |
 | **Objectives** | `setObjective()`, `getObjective()`, `getObjectiveCount()` — formulário se adapta ao 1.2/2004 |
-| **Interactions** | `recordInteraction()` via um quiz ao vivo com 4 perguntas e feedback visual de certo/errado |
+| **Interactions** | `recordInteraction()`, `getInteractionCount()` — quiz ao vivo com 4 perguntas e feedback visual de certo/errado |
 | **Comments** | `addLearnerComment()`, `getLearnerCommentCount()`, `getLmsCommentCount()` |
 | **Advanced** | `getRaw()`, `setRaw()`, `setProgressMeasure()`, `setNavRequest()`, `getNavRequestValid()`, `formatScorm12Time()`, `formatScorm2004Time()` |
 
@@ -291,14 +291,59 @@ Classes CSS reutilizáveis: `.section`, `.feature-block`, `.controls`, `.field`,
 
 ---
 
-## CI
+## Development Stack
 
-O GitHub Actions é executado em todo PR e push para `main`:
+### Build — Vite 7
 
-```yaml
-# .github/workflows/ci.yml
-- npm run lint    # ESLint
-- npm run build   # TypeScript check (tsc -b) + Vite build
+O [Vite](https://vite.dev) alimenta tanto o servidor de desenvolvimento quanto o build de produção.
+
+- HMR instantâneo via `@vitejs/plugin-react` (React Fast Refresh)
+- Transpilação TypeScript gerenciada pelo Vite (esbuild) — sem emissão de `tsc`
+- Build de produção: `tsc -b` para verificação de tipos + `vite build` para empacotamento
+
+### Language — TypeScript 5.9 (strict)
+
+Modo strict completo habilitado em `tsconfig.app.json`:
+
+| Opção | Valor | Efeito |
+|-------|-------|--------|
+| `strict` | `true` | Ativa todos os flags de verificação de tipo estrita |
+| `noUnusedLocals` | `true` | Erro em variáveis não utilizadas |
+| `noUnusedParameters` | `true` | Erro em parâmetros de função não utilizados |
+| `noFallthroughCasesInSwitch` | `true` | Impõe switch statements exaustivos |
+| `verbatimModuleSyntax` | `true` | Preserva a sintaxe de import/export exatamente |
+| `noEmit` | `true` | Somente verificação de tipos — o Vite cuida da compilação |
+
+Dois targets de tsconfig: `tsconfig.app.json` (src/, ES2022 + DOM) e `tsconfig.node.json` (vite.config.ts, ES2023 + tipos Node).
+
+### Linting — ESLint 9 (flat config)
+
+`eslint.config.js` usa o formato flat config com quatro conjuntos de regras:
+
+| Plugin | Versão | Regras fornecidas |
+|--------|--------|-------------------|
+| `@eslint/js` | 9.39 | Regras JS recomendadas do ESLint |
+| `typescript-eslint` | 8.48 | Linting específico para TypeScript |
+| `eslint-plugin-react-hooks` | 7.0 | Exhaustive deps, rules of hooks |
+| `eslint-plugin-react-refresh` | 0.4 | Validação de exportação de componentes React Fast Refresh |
+
+Execute com `npm run lint`.
+
+### Scripts
+
+| Script | Comando | Descrição |
+|--------|---------|-----------|
+| `npm run dev` | `vite` | Inicia o servidor de desenvolvimento em `http://localhost:5173` |
+| `npm run build` | `tsc -b && vite build` | Verificação de tipos + bundle de produção |
+| `npm run lint` | `eslint .` | Lint em todos os arquivos `.ts` / `.tsx` |
+| `npm run preview` | `vite preview` | Visualiza o build de produção localmente |
+
+### CI — GitHub Actions
+
+Executado em todo PR e push para `main` (Node 20, Ubuntu):
+
+```
+npm ci → npm run lint → npm run build
 ```
 
 ---

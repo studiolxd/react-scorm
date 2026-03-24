@@ -28,12 +28,12 @@ La aplicación tiene un **selector de versión SCORM** en la cabecera (1.2 / 200
 | Pestaña | Funcionalidades mostradas |
 |---------|--------------------------|
 | **Lifecycle** | `initialize()`, `commit()`, `terminate()`, `ScormStatus` en vivo, `useScormAutoTerminate` |
-| **Learner** | `getLearnerId()`, `getLearnerName()`, `getLaunchData()`, `getMode()`, `getCredit()`, `getEntry()`, `getMasteryScore()` |
+| **Learner** | `getLearnerId()`, `getLearnerName()`, `getLaunchData()`, `getMode()`, `getCredit()`, `getEntry()`, `getMasteryScore()`, `getMaxTimeAllowed()`, `getTimeLimitAction()` |
 | **Status** | `setComplete()`, `setIncomplete()`, `setPassed()`, `setFailed()`, `getCompletionStatus()`, `getSuccessStatus()` |
 | **Score** | `setScore({ raw, min, max, scaled? })`, `getScore()`, `getPreferences()`, `setPreference()` |
 | **Location** | `setLocation()`, `getLocation()`, `setSuspendData()`, `getSuspendData()`, `setSessionTime()`, `getTotalTime()`, `setExit()` |
 | **Objectives** | `setObjective()`, `getObjective()`, `getObjectiveCount()` — el formulario se adapta a 1.2/2004 |
-| **Interactions** | `recordInteraction()` mediante un cuestionario en vivo de 4 preguntas con retroalimentación visual de acierto/error |
+| **Interactions** | `recordInteraction()`, `getInteractionCount()` — cuestionario en vivo de 4 preguntas con retroalimentación visual de acierto/error |
 | **Comments** | `addLearnerComment()`, `getLearnerCommentCount()`, `getLmsCommentCount()` |
 | **Advanced** | `getRaw()`, `setRaw()`, `setProgressMeasure()`, `setNavRequest()`, `getNavRequestValid()`, `formatScorm12Time()`, `formatScorm2004Time()` |
 
@@ -284,14 +284,59 @@ Clases CSS reutilizables: `.section`, `.feature-block`, `.controls`, `.field`, `
 
 ---
 
-## CI
+## Pila de desarrollo
 
-GitHub Actions se ejecuta en cada PR y en cada push a `main`:
+### Build — Vite 7
 
-```yaml
-# .github/workflows/ci.yml
-- npm run lint    # ESLint
-- npm run build   # TypeScript check (tsc -b) + Vite build
+[Vite](https://vite.dev) impulsa tanto el servidor de desarrollo como la build de producción.
+
+- HMR instantáneo mediante `@vitejs/plugin-react` (React Fast Refresh)
+- Transpilación de TypeScript gestionada por Vite (esbuild) — sin emisión de `tsc`
+- Build de producción: `tsc -b` para verificación de tipos + `vite build` para el empaquetado
+
+### Language — TypeScript 5.9 (strict)
+
+Modo strict completo habilitado en `tsconfig.app.json`:
+
+| Opción | Valor | Efecto |
+|--------|-------|--------|
+| `strict` | `true` | Activa todos los flags de verificación estricta de tipos |
+| `noUnusedLocals` | `true` | Error en variables no utilizadas |
+| `noUnusedParameters` | `true` | Error en parámetros de función no utilizados |
+| `noFallthroughCasesInSwitch` | `true` | Obliga a sentencias switch exhaustivas |
+| `verbatimModuleSyntax` | `true` | Preserva la sintaxis de importación/exportación exactamente |
+| `noEmit` | `true` | Solo verificación de tipos — Vite gestiona la compilación |
+
+Dos objetivos tsconfig: `tsconfig.app.json` (src/, ES2022 + DOM) y `tsconfig.node.json` (vite.config.ts, ES2023 + tipos Node).
+
+### Linting — ESLint 9 (flat config)
+
+`eslint.config.js` usa el formato de configuración plana con cuatro conjuntos de reglas:
+
+| Plugin | Versión | Reglas aportadas |
+|--------|---------|-----------------|
+| `@eslint/js` | 9.39 | Reglas JS recomendadas de ESLint |
+| `typescript-eslint` | 8.48 | Linting específico de TypeScript |
+| `eslint-plugin-react-hooks` | 7.0 | Dependencias exhaustivas, reglas de hooks |
+| `eslint-plugin-react-refresh` | 0.4 | Validación de exportación de componentes React Fast Refresh |
+
+Ejecutar con `npm run lint`.
+
+### Scripts
+
+| Script | Comando | Descripción |
+|--------|---------|-------------|
+| `npm run dev` | `vite` | Iniciar servidor de desarrollo en `http://localhost:5173` |
+| `npm run build` | `tsc -b && vite build` | Verificación de tipos + bundle de producción |
+| `npm run lint` | `eslint .` | Analizar todos los archivos `.ts` / `.tsx` |
+| `npm run preview` | `vite preview` | Previsualizar la build de producción localmente |
+
+### CI — GitHub Actions
+
+Se ejecuta en cada PR y en cada push a `main` (Node 20, Ubuntu):
+
+```
+npm ci → npm run lint → npm run build
 ```
 
 ---

@@ -30,12 +30,12 @@ Die App besitzt einen **SCORM-Versionsumschalter** in der Kopfzeile (1.2 / 2004)
 | Tab | Demonstrierte Funktionen |
 |-----|--------------------------|
 | **Lifecycle** | `initialize()`, `commit()`, `terminate()`, Live-`ScormStatus`, `useScormAutoTerminate` |
-| **Learner** | `getLearnerId()`, `getLearnerName()`, `getLaunchData()`, `getMode()`, `getCredit()`, `getEntry()`, `getMasteryScore()` |
+| **Learner** | `getLearnerId()`, `getLearnerName()`, `getLaunchData()`, `getMode()`, `getCredit()`, `getEntry()`, `getMasteryScore()`, `getMaxTimeAllowed()`, `getTimeLimitAction()` |
 | **Status** | `setComplete()`, `setIncomplete()`, `setPassed()`, `setFailed()`, `getCompletionStatus()`, `getSuccessStatus()` |
 | **Score** | `setScore({ raw, min, max, scaled? })`, `getScore()`, `getPreferences()`, `setPreference()` |
 | **Location** | `setLocation()`, `getLocation()`, `setSuspendData()`, `getSuspendData()`, `setSessionTime()`, `getTotalTime()`, `setExit()` |
 | **Objectives** | `setObjective()`, `getObjective()`, `getObjectiveCount()` — Formular passt sich an 1.2/2004 an |
-| **Interactions** | `recordInteraction()` über ein Live-Quiz mit 4 Fragen und visueller Richtig/Falsch-Rückmeldung |
+| **Interactions** | `recordInteraction()`, `getInteractionCount()` — Live-Quiz mit 4 Fragen und visueller Richtig/Falsch-Rückmeldung |
 | **Comments** | `addLearnerComment()`, `getLearnerCommentCount()`, `getLmsCommentCount()` |
 | **Advanced** | `getRaw()`, `setRaw()`, `setProgressMeasure()`, `setNavRequest()`, `getNavRequestValid()`, `formatScorm12Time()`, `formatScorm2004Time()` |
 
@@ -286,14 +286,59 @@ Wiederverwendbare CSS-Klassen: `.section`, `.feature-block`, `.controls`, `.fiel
 
 ---
 
-## CI
+## Development Stack
 
-GitHub Actions wird bei jedem Pull Request und bei jedem Push auf `main` ausgeführt:
+### Build — Vite 7
 
-```yaml
-# .github/workflows/ci.yml
-- npm run lint    # ESLint
-- npm run build   # TypeScript check (tsc -b) + Vite build
+[Vite](https://vite.dev) betreibt sowohl den Entwicklungsserver als auch den Produktions-Build.
+
+- Sofortiges HMR via `@vitejs/plugin-react` (React Fast Refresh)
+- TypeScript-Transpilierung durch Vite (esbuild) — kein `tsc`-Emit
+- Produktions-Build: `tsc -b` für die Typprüfung + `vite build` für das Bündeln
+
+### Language — TypeScript 5.9 (strict)
+
+Vollständiger Strict-Modus aktiviert in `tsconfig.app.json`:
+
+| Option | Wert | Effekt |
+|--------|------|--------|
+| `strict` | `true` | Aktiviert alle strikten Typprüfungs-Flags |
+| `noUnusedLocals` | `true` | Fehler bei ungenutzten Variablen |
+| `noUnusedParameters` | `true` | Fehler bei ungenutzten Funktionsparametern |
+| `noFallthroughCasesInSwitch` | `true` | Erzwingt vollständige Switch-Anweisungen |
+| `verbatimModuleSyntax` | `true` | Behält Import-/Export-Syntax exakt bei |
+| `noEmit` | `true` | Nur Typprüfung — Vite übernimmt die Kompilierung |
+
+Zwei tsconfig-Ziele: `tsconfig.app.json` (src/, ES2022 + DOM) und `tsconfig.node.json` (vite.config.ts, ES2023 + Node-Typen).
+
+### Linting — ESLint 9 (flat config)
+
+`eslint.config.js` verwendet das Flat-Config-Format mit vier Regelsets:
+
+| Plugin | Version | Bereitgestellte Regeln |
+|--------|---------|------------------------|
+| `@eslint/js` | 9.39 | ESLint-empfohlene JS-Regeln |
+| `typescript-eslint` | 8.48 | TypeScript-spezifisches Linting |
+| `eslint-plugin-react-hooks` | 7.0 | Exhaustive deps, rules of hooks |
+| `eslint-plugin-react-refresh` | 0.4 | Validierung von React-Fast-Refresh-Komponentenexporten |
+
+Ausführen mit `npm run lint`.
+
+### Skripte
+
+| Skript | Befehl | Beschreibung |
+|--------|--------|--------------|
+| `npm run dev` | `vite` | Startet den Entwicklungsserver unter `http://localhost:5173` |
+| `npm run build` | `tsc -b && vite build` | Typprüfung + Produktionsbundle |
+| `npm run lint` | `eslint .` | Lintet alle `.ts`- / `.tsx`-Dateien |
+| `npm run preview` | `vite preview` | Vorschau des Produktions-Builds lokal |
+
+### CI — GitHub Actions
+
+Läuft bei jedem PR und jedem Push auf `main` (Node 20, Ubuntu):
+
+```
+npm ci → npm run lint → npm run build
 ```
 
 ---

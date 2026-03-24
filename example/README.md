@@ -32,12 +32,12 @@ the behavior of both SCORM standards side-by-side.
 | Tab | Features demonstrated |
 |-----|-----------------------|
 | **Lifecycle** | `initialize()`, `commit()`, `terminate()`, live `ScormStatus`, `useScormAutoTerminate` |
-| **Learner** | `getLearnerId()`, `getLearnerName()`, `getLaunchData()`, `getMode()`, `getCredit()`, `getEntry()`, `getMasteryScore()` |
+| **Learner** | `getLearnerId()`, `getLearnerName()`, `getLaunchData()`, `getMode()`, `getCredit()`, `getEntry()`, `getMasteryScore()`, `getMaxTimeAllowed()`, `getTimeLimitAction()` |
 | **Status** | `setComplete()`, `setIncomplete()`, `setPassed()`, `setFailed()`, `getCompletionStatus()`, `getSuccessStatus()` |
 | **Score** | `setScore({ raw, min, max, scaled? })`, `getScore()`, `getPreferences()`, `setPreference()` |
 | **Location** | `setLocation()`, `getLocation()`, `setSuspendData()`, `getSuspendData()`, `setSessionTime()`, `getTotalTime()`, `setExit()` |
 | **Objectives** | `setObjective()`, `getObjective()`, `getObjectiveCount()` — form adapts to 1.2/2004 |
-| **Interactions** | `recordInteraction()` via a live 4-question quiz with visual correct/incorrect feedback |
+| **Interactions** | `recordInteraction()`, `getInteractionCount()` — live 4-question quiz with visual correct/incorrect feedback |
 | **Comments** | `addLearnerComment()`, `getLearnerCommentCount()`, `getLmsCommentCount()` |
 | **Advanced** | `getRaw()`, `setRaw()`, `setProgressMeasure()`, `setNavRequest()`, `getNavRequestValid()`, `formatScorm12Time()`, `formatScorm2004Time()` |
 
@@ -291,14 +291,59 @@ Reusable CSS classes: `.section`, `.feature-block`, `.controls`, `.field`, `.fie
 
 ---
 
-## CI
+## Development Stack
 
-GitHub Actions runs on every PR and push to `main`:
+### Build — Vite 7
 
-```yaml
-# .github/workflows/ci.yml
-- npm run lint    # ESLint
-- npm run build   # TypeScript check (tsc -b) + Vite build
+[Vite](https://vite.dev) powers both the dev server and the production build.
+
+- Instant HMR via `@vitejs/plugin-react` (React Fast Refresh)
+- TypeScript transpilation handled by Vite (esbuild) — no `tsc` emit
+- Production build: `tsc -b` for type-checking + `vite build` for bundling
+
+### Language — TypeScript 5.9 (strict)
+
+Full strict mode enabled in `tsconfig.app.json`:
+
+| Option | Value | Effect |
+|--------|-------|--------|
+| `strict` | `true` | Enables all strict type-checking flags |
+| `noUnusedLocals` | `true` | Error on unused variables |
+| `noUnusedParameters` | `true` | Error on unused function parameters |
+| `noFallthroughCasesInSwitch` | `true` | Enforces exhaustive switch statements |
+| `verbatimModuleSyntax` | `true` | Preserves import/export syntax exactly |
+| `noEmit` | `true` | Type-check only — Vite handles compilation |
+
+Two tsconfig targets: `tsconfig.app.json` (src/, ES2022 + DOM) and `tsconfig.node.json` (vite.config.ts, ES2023 + Node types).
+
+### Linting — ESLint 9 (flat config)
+
+`eslint.config.js` uses the flat config format with four rule sets:
+
+| Plugin | Version | Rules provided |
+|--------|---------|----------------|
+| `@eslint/js` | 9.39 | ESLint recommended JS rules |
+| `typescript-eslint` | 8.48 | TypeScript-specific linting |
+| `eslint-plugin-react-hooks` | 7.0 | Exhaustive deps, rules of hooks |
+| `eslint-plugin-react-refresh` | 0.4 | React Fast Refresh component export validation |
+
+Run with `npm run lint`.
+
+### Scripts
+
+| Script | Command | Description |
+|--------|---------|-------------|
+| `npm run dev` | `vite` | Start dev server at `http://localhost:5173` |
+| `npm run build` | `tsc -b && vite build` | Type-check + production bundle |
+| `npm run lint` | `eslint .` | Lint all `.ts` / `.tsx` files |
+| `npm run preview` | `vite preview` | Preview the production build locally |
+
+### CI — GitHub Actions
+
+Runs on every PR and every push to `main` (Node 20, Ubuntu):
+
+```
+npm ci → npm run lint → npm run build
 ```
 
 ---
