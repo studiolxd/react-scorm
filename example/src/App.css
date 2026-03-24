@@ -6,7 +6,8 @@
   --border: rgba(0, 0, 0, 0.08);
   --border-focus: rgba(186, 171, 255, 0.7);
 
-  --accent: #BAABFF;       /* lavender */
+  --accent: #BAABFF;       /* lavender — decorative: backgrounds, borders */
+  --accent-fg: #4B2FD4;   /* dark purple — text on accent-tinted surfaces */
   --accent-dim: rgba(186, 171, 255, 0.15);
   --accent-2004: #7c3aed;  /* violet — SCORM 2004 only features */
   --accent-2004-dim: rgba(124, 58, 237, 0.08);
@@ -128,7 +129,7 @@ html, body, #root {
 
 .version-btn.active {
   background: var(--accent-dim);
-  color: var(--accent);
+  color: var(--accent-fg);
 }
 
 /* ─── Mock mode badge ────────────────────────────────────────── */
@@ -141,7 +142,7 @@ html, body, #root {
   border: 1px solid rgba(186, 171, 255, 0.4);
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--accent);
+  color: var(--accent-fg);
   letter-spacing: 0.04em;
 }
 
@@ -196,7 +197,7 @@ html, body, #root {
 
 .tab-btn.active {
   background: var(--accent-dim);
-  color: var(--accent);
+  color: var(--accent-fg);
   font-weight: 500;
 }
 
@@ -325,7 +326,7 @@ select.field-input { cursor: pointer; }
 .btn-primary {
   background: var(--accent-dim);
   border-color: rgba(186, 171, 255, 0.4);
-  color: var(--accent);
+  color: var(--accent-fg);
 }
 .btn-primary:hover { background: rgba(186, 171, 255, 0.25); }
 
@@ -426,7 +427,7 @@ select.field-input { cursor: pointer; }
 
 .badge-12 {
   background: rgba(186, 171, 255, 0.12);
-  color: var(--accent);
+  color: var(--accent-fg);
   border: 1px solid rgba(186, 171, 255, 0.35);
 }
 
@@ -516,7 +517,7 @@ details.code-details pre {
   border-radius: 99px;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--accent);
+  color: var(--accent-fg);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -529,7 +530,7 @@ details.code-details pre {
 .placeholder-text code {
   font-family: var(--font-mono);
   font-size: 13px;
-  color: var(--accent);
+  color: var(--accent-fg);
 }
 
 /* ─── Footer ─────────────────────────────────────────────────── */
