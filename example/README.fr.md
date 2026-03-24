@@ -342,6 +342,37 @@ npm ci → npm run lint → npm run build
 
 ---
 
+## Compétences Claude Code
+
+Deux compétences de développement IA sont préinstallées pour une utilisation avec [Claude Code](https://claude.ai/claude-code) :
+
+### `frontend-design` — Anthropic
+
+> Source : `anthropics/skills`
+
+Guide la création d'interfaces frontend distinctives et prêtes pour la production. Se déclenche lors de la construction de composants, de pages ou de toute interface web. Impose une direction esthétique audacieuse, des choix de conception intentionnels et une implémentation soignée — en évitant explicitement l'esthétique générique générée par IA.
+
+### `vercel-react-best-practices` — Vercel
+
+> Source : `vercel-labs/agent-skills`
+
+Directives d'optimisation des performances React maintenues par Vercel Engineering. Contient **57 règles réparties en 8 catégories**, appliquées lors de l'écriture ou de la révision de composants React, de la récupération de données, de la configuration des bundles ou de tout code sensible aux performances :
+
+| Catégorie | Règles | Focus |
+|-----------|:------:|-------|
+| `rerender` | 13 | Éviter les re-rendus inutiles (memo, état dérivé, refs) |
+| `js` | 12 | Performances JavaScript (mise en cache, sorties anticipées, structures de données efficaces) |
+| `rendering` | 10 | Optimisation du rendu (rendu conditionnel, hydratation, transitions) |
+| `server` | 7 | Modèles côté serveur (récupération parallèle, mise en cache, actions d'authentification) |
+| `async` | 5 | Modèles asynchrones (limites Suspense, await différé, dépendances parallèles) |
+| `bundle` | 5 | Optimisation des bundles (imports dynamiques, barrel files, préchargement) |
+| `client` | 4 | Modèles côté client (écouteurs d'événements, schéma localStorage, déduplication SWR) |
+| `advanced` | 3 | Modèles avancés (refs de gestionnaires d'événements, init-once, useLatest) |
+
+Les compétences sont installées dans `.agents/skills/` et épinglées dans `skills-lock.json`.
+
+---
+
 ## Licence
 
 MIT — voir [LICENSE](./LICENSE).

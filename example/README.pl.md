@@ -347,6 +347,37 @@ npm ci → npm run lint → npm run build
 
 ---
 
+## Umiejętności Claude Code
+
+Dwie umiejętności programistyczne AI są wstępnie zainstalowane do użytku z [Claude Code](https://claude.ai/claude-code):
+
+### `frontend-design` — Anthropic
+
+> Źródło: `anthropics/skills`
+
+Kieruje tworzeniem wyróżniających się, produkcyjnych interfejsów frontend. Uruchamia się przy budowaniu komponentów, stron lub dowolnego UI webowego. Wymusza śmiały kierunek estetyczny, przemyślane decyzje projektowe i dopracowaną implementację — jawnie unikając generycznej estetyki tworzonej przez AI.
+
+### `vercel-react-best-practices` — Vercel
+
+> Źródło: `vercel-labs/agent-skills`
+
+Wytyczne optymalizacji wydajności React utrzymywane przez Vercel Engineering. Zawiera **57 reguł w 8 kategoriach**, stosowanych przy pisaniu lub przeglądaniu komponentów React, pobierania danych, konfiguracji bundle lub kodu wrażliwego na wydajność:
+
+| Kategoria | Reguły | Skupienie |
+|-----------|:------:|-----------|
+| `rerender` | 13 | Unikanie zbędnych ponownych renderowań (memo, stan pochodny, refs) |
+| `js` | 12 | Wydajność JavaScript (cache, wczesne wyjścia, wydajne struktury danych) |
+| `rendering` | 10 | Optymalizacja renderowania (renderowanie warunkowe, hydratacja, przejścia) |
+| `server` | 7 | Wzorce po stronie serwera (równoległe pobieranie, cache, akcje auth) |
+| `async` | 5 | Wzorce asynchroniczne (granice Suspense, opóźniony await, równoległe zależności) |
+| `bundle` | 5 | Optymalizacja bundle (dynamiczne importy, pliki barrel, wstępne ładowanie) |
+| `client` | 4 | Wzorce po stronie klienta (event listeners, schemat localStorage, deduplikacja SWR) |
+| `advanced` | 3 | Zaawansowane wzorce (refs handlerów zdarzeń, init-once, useLatest) |
+
+Umiejętności są instalowane w `.agents/skills/` i przypięte w `skills-lock.json`.
+
+---
+
 ## Licencja
 
 MIT — patrz [LICENSE](./LICENSE).

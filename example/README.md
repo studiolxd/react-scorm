@@ -348,6 +348,37 @@ npm ci → npm run lint → npm run build
 
 ---
 
+## Claude Code Skills
+
+Two AI development skills are pre-installed for use with [Claude Code](https://claude.ai/claude-code):
+
+### `frontend-design` — Anthropic
+
+> Source: `anthropics/skills`
+
+Guides the creation of distinctive, production-grade frontend interfaces. Triggers when building components, pages, or any web UI. Enforces a bold aesthetic direction, intentional design choices, and polished implementation — explicitly avoiding generic AI-generated aesthetics.
+
+### `vercel-react-best-practices` — Vercel
+
+> Source: `vercel-labs/agent-skills`
+
+React performance optimization guidelines maintained by Vercel Engineering. Contains **57 rules across 8 categories**, applied when writing or reviewing React components, data fetching, bundle configuration, or any performance-sensitive code:
+
+| Category | Rules | Focus |
+|----------|:-----:|-------|
+| `rerender` | 13 | Avoiding unnecessary re-renders (memo, derived state, refs) |
+| `js` | 12 | JavaScript performance (caching, early exits, efficient data structures) |
+| `rendering` | 10 | Render optimization (conditional rendering, hydration, transitions) |
+| `server` | 7 | Server-side patterns (parallel fetching, caching, auth actions) |
+| `async` | 5 | Async patterns (Suspense boundaries, deferred await, parallel deps) |
+| `bundle` | 5 | Bundle optimization (dynamic imports, barrel files, preloading) |
+| `client` | 4 | Client-side patterns (event listeners, localStorage schema, SWR dedup) |
+| `advanced` | 3 | Advanced patterns (event handler refs, init-once, useLatest) |
+
+Skills are installed under `.agents/skills/` and pinned in `skills-lock.json`.
+
+---
+
 ## License
 
 MIT — see [LICENSE](./LICENSE).

@@ -343,6 +343,37 @@ npm ci → npm run lint → npm run build
 
 ---
 
+## Claude Code Skills
+
+Zwei KI-Entwicklungs-Skills sind für die Verwendung mit [Claude Code](https://claude.ai/claude-code) vorinstalliert:
+
+### `frontend-design` — Anthropic
+
+> Quelle: `anthropics/skills`
+
+Leitet die Erstellung unverwechselbarer, produktionsreifer Frontend-Oberflächen an. Wird beim Erstellen von Komponenten, Seiten oder jeder Web-UI ausgelöst. Setzt eine markante ästhetische Richtung, bewusste Designentscheidungen und eine ausgefeilte Umsetzung durch — und vermeidet dabei ausdrücklich generische KI-erzeugte Ästhetik.
+
+### `vercel-react-best-practices` — Vercel
+
+> Quelle: `vercel-labs/agent-skills`
+
+React-Leistungsoptimierungsrichtlinien, gepflegt von Vercel Engineering. Enthält **57 Regeln in 8 Kategorien**, die beim Schreiben oder Überprüfen von React-Komponenten, Datenabruf, Bundle-Konfiguration oder leistungssensiblem Code angewendet werden:
+
+| Kategorie | Regeln | Schwerpunkt |
+|-----------|:------:|-------------|
+| `rerender` | 13 | Unnötige Re-Renders vermeiden (memo, abgeleiteter Zustand, Refs) |
+| `js` | 12 | JavaScript-Leistung (Caching, frühe Rückgaben, effiziente Datenstrukturen) |
+| `rendering` | 10 | Render-Optimierung (bedingtes Rendern, Hydratisierung, Übergänge) |
+| `server` | 7 | Serverseitige Muster (paralleles Abrufen, Caching, Auth-Aktionen) |
+| `async` | 5 | Asynchrone Muster (Suspense-Grenzen, verzögertes await, parallele Abhängigkeiten) |
+| `bundle` | 5 | Bundle-Optimierung (dynamische Importe, Barrel-Dateien, Vorladen) |
+| `client` | 4 | Clientseitige Muster (Event-Listener, localStorage-Schema, SWR-Deduplizierung) |
+| `advanced` | 3 | Fortgeschrittene Muster (Event-Handler-Refs, Init-once, useLatest) |
+
+Skills werden unter `.agents/skills/` installiert und in `skills-lock.json` fixiert.
+
+---
+
 ## Lizenz
 
 MIT — siehe [LICENSE](./LICENSE).

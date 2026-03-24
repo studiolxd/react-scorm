@@ -348,6 +348,37 @@ npm ci → npm run lint → npm run build
 
 ---
 
+## Habilidades do Claude Code
+
+Duas habilidades de desenvolvimento com IA estão pré-instaladas para uso com o [Claude Code](https://claude.ai/claude-code):
+
+### `frontend-design` — Anthropic
+
+> Fonte: `anthropics/skills`
+
+Orienta a criação de interfaces frontend distintivas e prontas para produção. Acionada ao construir componentes, páginas ou qualquer UI web. Impõe uma direção estética marcante, escolhas de design intencionais e implementação refinada — evitando explicitamente estéticas genéricas geradas por IA.
+
+### `vercel-react-best-practices` — Vercel
+
+> Fonte: `vercel-labs/agent-skills`
+
+Diretrizes de otimização de desempenho para React mantidas pela Vercel Engineering. Contém **57 regras em 8 categorias**, aplicadas ao escrever ou revisar componentes React, busca de dados, configuração de bundle ou qualquer código sensível a desempenho:
+
+| Categoria | Regras | Foco |
+|-----------|:------:|------|
+| `rerender` | 13 | Evitando re-renderizações desnecessárias (memo, estado derivado, refs) |
+| `js` | 12 | Desempenho JavaScript (cache, saídas antecipadas, estruturas de dados eficientes) |
+| `rendering` | 10 | Otimização de renderização (renderização condicional, hidratação, transições) |
+| `server` | 7 | Padrões do lado do servidor (busca paralela, cache, ações de autenticação) |
+| `async` | 5 | Padrões assíncronos (limites Suspense, await adiado, dependências paralelas) |
+| `bundle` | 5 | Otimização de bundle (importações dinâmicas, arquivos barrel, pré-carregamento) |
+| `client` | 4 | Padrões do lado do cliente (event listeners, esquema localStorage, deduplicação SWR) |
+| `advanced` | 3 | Padrões avançados (refs de event handler, init-once, useLatest) |
+
+As habilidades são instaladas em `.agents/skills/` e fixadas em `skills-lock.json`.
+
+---
+
 ## Licença
 
 MIT — veja [LICENSE](./LICENSE).
