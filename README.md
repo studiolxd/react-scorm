@@ -6,10 +6,10 @@ Monorepo containing the `@studiolxd/react-scorm` headless SCORM runtime library 
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| [`@studiolxd/react-scorm`](./packages/react-scorm/) | Headless React + TypeScript SCORM 1.2 / 2004 runtime library |
-| [`example`](./example/) | Interactive demo app — showcases every library feature |
+| Package | Description | Docs |
+|---------|-------------|------|
+| [`@studiolxd/react-scorm`](./packages/react-scorm/) | Headless React + TypeScript SCORM 1.2 / 2004 runtime library | [README](./packages/react-scorm/README.md) |
+| [`example`](./example/) | Interactive demo app — showcases every library feature | [README](./example/README.md) |
 
 ## Getting Started
 

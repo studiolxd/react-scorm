@@ -7,9 +7,9 @@ Monorepo que contiene la librería headless `@studiolxd/react-scorm` para el run
 ## Paquetes
 
 | Paquete | Descripción |
-|---------|-------------|
-| [`@studiolxd/react-scorm`](./packages/react-scorm/) | Librería headless React + TypeScript para el runtime de SCORM 1.2 / 2004 |
-| [`example`](./example/) | Aplicación de demostración interactiva — muestra todas las funcionalidades de la librería |
+|---------|-------------|------|
+| [`@studiolxd/react-scorm`](./packages/react-scorm/) | Librería headless React + TypeScript para el runtime de SCORM 1.2 / 2004 | [README](./packages/react-scorm/README.md) |
+| [`example`](./example/) | Aplicación de demostración interactiva — muestra todas las funcionalidades de la librería | [README](./example/README.md) |
 
 ## Primeros pasos
 

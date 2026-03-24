@@ -8,8 +8,8 @@ Monorepo contendo a biblioteca headless `@studiolxd/react-scorm` para o runtime 
 
 | Pacote | Descrição |
 |--------|-----------|
-| [`@studiolxd/react-scorm`](./packages/react-scorm/) | Biblioteca headless React + TypeScript para o runtime SCORM 1.2 / 2004 |
-| [`example`](./example/) | Aplicativo de demonstração interativo — apresenta todos os recursos da biblioteca |
+| [`@studiolxd/react-scorm`](./packages/react-scorm/) | Biblioteca headless React + TypeScript para o runtime SCORM 1.2 / 2004 | [README](./packages/react-scorm/README.md) |
+| [`example`](./example/) | Aplicativo de demonstração interativo — apresenta todos os recursos da biblioteca | [README](./example/README.md) |
 
 ## Primeiros passos
 
