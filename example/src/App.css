@@ -9,8 +9,8 @@
   --accent: #BAABFF;       /* lavender — decorative: backgrounds, borders */
   --accent-fg: #111E30;   /* brand color — text on accent-tinted surfaces */
   --accent-dim: #BAABFF;
-  --accent-2004: #7c3aed;  /* violet — SCORM 2004 only features */
-  --accent-2004-dim: rgba(124, 58, 237, 0.08);
+  --accent-2004: #111E30;
+  --accent-2004-dim: #BAABFF;
 
   --text: #111E30;
   --text-muted: #111E30;
@@ -434,7 +434,7 @@ select.field-input { cursor: pointer; }
 .badge-2004 {
   background: var(--accent-2004-dim);
   color: var(--accent-2004);
-  border: 1px solid rgba(124, 58, 237, 0.2);
+  border: 1px solid rgba(186, 171, 255, 0.35);
 }
 
 .badge-both {
