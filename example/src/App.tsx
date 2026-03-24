@@ -84,7 +84,6 @@ export default function App() {
       <header className="app-header">
         <div className="app-header-left">
           <div className="app-logo">React SCORM</div>
-          <span className="app-tagline">interactive demo</span>
         </div>
 
         <div className="app-header-right">
