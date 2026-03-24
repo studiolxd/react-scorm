@@ -1,28 +1,28 @@
 /* ─── Design tokens ──────────────────────────────────────────── */
 :root {
-  --bg: #0a0c10;
-  --bg-card: #111318;
-  --bg-input: #0d0f14;
-  --border: rgba(255, 255, 255, 0.07);
-  --border-focus: rgba(52, 211, 153, 0.4);
+  --bg: #f5f7fa;
+  --bg-card: #ffffff;
+  --bg-input: #eef0f5;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-focus: rgba(5, 150, 105, 0.45);
 
-  --accent: #34d399;       /* emerald */
-  --accent-dim: rgba(52, 211, 153, 0.12);
-  --accent-2004: #a78bfa;  /* violet — SCORM 2004 only features */
-  --accent-2004-dim: rgba(167, 139, 250, 0.12);
+  --accent: #059669;       /* emerald */
+  --accent-dim: rgba(5, 150, 105, 0.09);
+  --accent-2004: #7c3aed;  /* violet — SCORM 2004 only features */
+  --accent-2004-dim: rgba(124, 58, 237, 0.08);
 
-  --text: #e2e8f0;
+  --text: #0f172a;
   --text-muted: #64748b;
-  --text-dim: #334155;
+  --text-dim: #94a3b8;
 
-  --success: #34d399;
-  --error: #f87171;
-  --warning: #fbbf24;
+  --success: #059669;
+  --error: #dc2626;
+  --warning: #d97706;
 
   --radius: 6px;
   --radius-lg: 10px;
 
-  --font-ui: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-ui: 'Google Sans Flex', 'Google Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', 'Fira Code', 'Cascadia Code', monospace;
 }
 
@@ -56,7 +56,7 @@ html, body, #root {
   padding: 0 24px;
   height: 56px;
   border-bottom: 1px solid var(--border);
-  background: rgba(10, 12, 16, 0.95);
+  background: rgba(245, 247, 250, 0.95);
   backdrop-filter: blur(8px);
   position: sticky;
   top: 0;
@@ -132,7 +132,7 @@ html, body, #root {
   letter-spacing: 0.02em;
 }
 
-.version-btn:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.version-btn:hover { color: var(--text); background: rgba(0,0,0,0.05); }
 
 .version-btn.active {
   background: var(--accent-dim);
@@ -146,7 +146,7 @@ html, body, #root {
   gap: 6px;
   padding: 4px 10px;
   border-radius: 99px;
-  border: 1px solid rgba(52, 211, 153, 0.2);
+  border: 1px solid rgba(5, 150, 105, 0.2);
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--accent);
@@ -202,7 +202,7 @@ html, body, #root {
   width: 100%;
 }
 
-.tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.tab-btn:hover { color: var(--text); background: rgba(0,0,0,0.05); }
 
 .tab-btn.active {
   background: var(--accent-dim);
@@ -320,7 +320,7 @@ select.field-input { cursor: pointer; }
   padding: 7px 16px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.04);
   color: var(--text);
   font-family: var(--font-ui);
   font-size: 13px;
@@ -330,22 +330,22 @@ select.field-input { cursor: pointer; }
   white-space: nowrap;
 }
 
-.btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); }
+.btn:hover { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.14); }
 .btn:active { transform: scale(0.98); }
 
 .btn-primary {
   background: var(--accent-dim);
-  border-color: rgba(52, 211, 153, 0.25);
+  border-color: rgba(5, 150, 105, 0.25);
   color: var(--accent);
 }
-.btn-primary:hover { background: rgba(52, 211, 153, 0.18); }
+.btn-primary:hover { background: rgba(5, 150, 105, 0.15); }
 
 .btn-danger {
-  background: rgba(248, 113, 113, 0.1);
-  border-color: rgba(248, 113, 113, 0.25);
+  background: rgba(220, 38, 38, 0.07);
+  border-color: rgba(220, 38, 38, 0.2);
   color: var(--error);
 }
-.btn-danger:hover { background: rgba(248, 113, 113, 0.18); }
+.btn-danger:hover { background: rgba(220, 38, 38, 0.13); }
 
 .btn:disabled {
   opacity: 0.4;
@@ -368,19 +368,19 @@ select.field-input { cursor: pointer; }
 }
 
 .result.ok {
-  background: rgba(52, 211, 153, 0.06);
-  border: 1px solid rgba(52, 211, 153, 0.15);
+  background: rgba(5, 150, 105, 0.06);
+  border: 1px solid rgba(5, 150, 105, 0.18);
   color: var(--success);
 }
 
 .result.error {
-  background: rgba(248, 113, 113, 0.06);
-  border: 1px solid rgba(248, 113, 113, 0.15);
+  background: rgba(220, 38, 38, 0.05);
+  border: 1px solid rgba(220, 38, 38, 0.18);
   color: var(--error);
 }
 
 .result.info {
-  background: rgba(148, 163, 184, 0.06);
+  background: rgba(100, 116, 139, 0.06);
   border: 1px solid var(--border);
   color: var(--text-muted);
 }
@@ -436,19 +436,19 @@ select.field-input { cursor: pointer; }
 }
 
 .badge-12 {
-  background: rgba(52, 211, 153, 0.1);
+  background: rgba(5, 150, 105, 0.08);
   color: var(--accent);
-  border: 1px solid rgba(52, 211, 153, 0.2);
+  border: 1px solid rgba(5, 150, 105, 0.2);
 }
 
 .badge-2004 {
   background: var(--accent-2004-dim);
   color: var(--accent-2004);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  border: 1px solid rgba(124, 58, 237, 0.2);
 }
 
 .badge-both {
-  background: rgba(148, 163, 184, 0.1);
+  background: rgba(100, 116, 139, 0.08);
   color: var(--text-muted);
   border: 1px solid var(--border);
 }
@@ -498,8 +498,8 @@ details.code-details pre {
   display: flex;
   gap: 10px;
   padding: 12px 14px;
-  background: rgba(251, 191, 36, 0.05);
-  border: 1px solid rgba(251, 191, 36, 0.15);
+  background: rgba(217, 119, 6, 0.06);
+  border: 1px solid rgba(217, 119, 6, 0.18);
   border-radius: var(--radius);
   font-size: 12px;
   color: var(--warning);
@@ -523,7 +523,7 @@ details.code-details pre {
 .placeholder-badge {
   padding: 4px 12px;
   background: var(--accent-dim);
-  border: 1px solid rgba(52, 211, 153, 0.2);
+  border: 1px solid rgba(5, 150, 105, 0.2);
   border-radius: 99px;
   font-family: var(--font-mono);
   font-size: 11px;
