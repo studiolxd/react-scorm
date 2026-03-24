@@ -122,7 +122,9 @@ export default function App() {
       </ScormProvider>
 
       <footer className="app-footer">
-        <img src="/logo.svg" alt="StudioLXD" className="footer-logo" />
+        <a href="https://studiolxd.com" target="_blank" rel="noopener noreferrer">
+          <img src="/logo.svg" alt="StudioLXD" className="footer-logo" />
+        </a>
         <a
           href="https://github.com/studiolxd/react-scorm"
           target="_blank"
