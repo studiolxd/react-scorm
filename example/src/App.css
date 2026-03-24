@@ -7,7 +7,7 @@
   --border-focus: rgba(186, 171, 255, 0.7);
 
   --accent: #BAABFF;       /* lavender — decorative: backgrounds, borders */
-  --accent-fg: #111E30;   /* brand dark — text on accent-tinted surfaces */
+  --accent-fg: #BAABFF;   /* lavender — text on accent-tinted surfaces */
   --accent-dim: rgba(186, 171, 255, 0.15);
   --accent-2004: #7c3aed;  /* violet — SCORM 2004 only features */
   --accent-2004-dim: rgba(124, 58, 237, 0.08);
