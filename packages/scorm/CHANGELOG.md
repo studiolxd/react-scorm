@@ -1,6 +1,32 @@
 # Changelog
 
-All notable changes to `@studiolxd/react-scorm` are documented here.
+All notable changes to `@studiolxd/scorm` are documented here.
+
+## [2.0.0] - 2026-06-15
+
+### Changed (BREAKING)
+- **Renamed** `@studiolxd/react-scorm` → `@studiolxd/scorm`. The React API moved to the
+  `@studiolxd/scorm/react` subpath (`import { ScormProvider, useScorm } from '@studiolxd/scorm/react'`).
+- The package root (`@studiolxd/scorm`) is now **framework-agnostic** — no React imports.
+
+### Added
+- **Framework-agnostic core**: `createScormSession(version, options)` — an observable
+  session with `on('change')` / `off` / `destroy` and reactive `status`.
+- **Vanilla lifecycle helpers**: `autoTerminate(session, opts)` and `autoCommit(session, ms)`,
+  each returning a `dispose()` (the React hooks now delegate to these).
+- **Adapters as subpaths**:
+  - `@studiolxd/scorm/vue` — `useScorm()` composable (Vue 3.3+)
+  - `@studiolxd/scorm/angular` — `provideScorm()` + `SCORM` token (Angular 17+, decorator-free)
+  - `@studiolxd/scorm/svelte` — `createScormStore()` (Svelte 4+)
+  - `@studiolxd/scorm/wc` — `<scorm-session>` Web Component
+- **IIFE/global build** for plain `<script>` / CDN usage (`window.Scorm`, `dist/scorm.global.js`).
+- `version: 'auto'` resolution surfaced through the session/adapters.
+- `llms.txt` shipped in the package for AI coding tools; `AGENTS.md` + a `skills/` source.
+
+### Internal
+- `useScormSession()` now subscribes via `useSyncExternalStore` for reactive
+  `initialized`/`terminated`; `ScormProvider` builds and shares a `ScormSession`.
+- Framework dependencies are **optional** peer dependencies — install only what you use.
 
 ## [1.1.0] - 2026-06-15
 
